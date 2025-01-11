@@ -1,76 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import { fetchLessons } from ' @/utils/fetchLessons';
-import { Lesson } from ' @/types/Lesson';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { IPost } from ' @/models/Post';
+import LoadingSpinner from './LoadingSpinner';
+import ImageUpload from './ImageUpload';
+import axios from 'axios';
+
+interface Testimony {
+  _id: string;
+  name: string;
+  testimony: string;
+  imageUrl?: string;
+}
 
 const HomeComponent = () => {
-  const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [showTestimonyModal, setShowTestimonyModal] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
-  const handleShareTestimony = () => {
-    console.log('Testimony submitted!');
-    setShowTestimonyModal(false);
-  };
-
-  const featuredBlogs = [
-    {
-      title: 'The Restoration of the Gospel',
-      content:
-        'Discover how the Gospel of Jesus Christ was restored in these latter days, bringing light and truth to the world.',
-      image: '/images/lesson1.jpg',
-      author: 'Elder Andrew',
-      publishDate: new Date(),
-    },
-    {
-      title: 'The Plan of Salvation',
-      content:
-        'Learn about God’s plan for your happiness and how you can find peace and purpose in your life.',
-      image: '/images/lesson2.jpg',
-      author: 'Elder Andrew',
-      publishDate: new Date(),
-    },
-    {
-      title: 'Families and Temples',
-      content:
-        'Explore the eternal significance of families and the sacred ordinances performed in holy temples.',
-      image: '/images/lesson3.jpg',
-      author: 'Elder Andrew',
-      publishDate: new Date(),
-    },
-    {
-      title: 'Faith and Obedience',
-      content:
-        'Understand the role of faith and obedience in drawing closer to Christ and receiving His blessings.',
-      image: '/images/lesson4.jpg',
-      author: 'Elder Andrew',
-      publishDate: new Date(),
-    },
-  ];
+  const [featuredBlogs, setFeaturedBlogs] = useState<IPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [testimonies, setTestimonies] = useState<Testimony[]>([]);
+  const [showTestimonyModal, setShowTestimonyModal] = useState(false);
+  const [name, setName] = useState('');
+  const [testimony, setTestimony] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    const loadLessons = async () => {
+    setIsClient(true);
+
+    const fetchPosts = async () => {
       try {
-        const data = await fetchLessons();
-        setLessons(data);
+        const response = await fetch('/api/posts');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        const shuffled = data.posts.sort(() => 0.5 - Math.random());
+        setFeaturedBlogs(shuffled.slice(0, 6));
+
+        setLoading(false);
       } catch (error) {
-        console.error('Error fetching lessons:', error);
+        console.error('Error fetching posts:', error);
+        setLoading(false);
       }
     };
 
-    loadLessons();
-    setIsClient(true);
+    fetchPosts();
+    fetchTestimonies();
   }, []);
+
+  const fetchTestimonies = async () => {
+    const response = await axios.get('/api/testimonies?approved=true');
+    const approvedTestimonies: Testimony[] = response.data.testimonies;
+    const randomTestimonies = approvedTestimonies
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3);
+    setTestimonies(randomTestimonies);
+  };
+
+  const handleShareTestimony = async () => {
+    await axios.post('/api/testimonies', { name, testimony, imageUrl });
+    setShowTestimonyModal(false);
+    fetchTestimonies();
+  };
 
   if (!isClient) {
     return null;
   }
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <div className="font-body">
-      {/* Welcome Section */}
       {/* Welcome Section */}
       <section
         className="relative p-16 text-center bg-cover bg-center"
@@ -217,6 +224,7 @@ const HomeComponent = () => {
               className="relative bg-black rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 1 }}
             >
               {blog.image && (
                 <Image
@@ -243,7 +251,7 @@ const HomeComponent = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  {blog.content}
+                  {blog.description}
                 </motion.p>
                 <motion.p
                   className="text-sm text-gray-400 mb-6"
@@ -251,16 +259,18 @@ const HomeComponent = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  By {blog.author} |{' '}
+                  By {blog.author} |
                   {new Date(blog.publishDate).toLocaleDateString()}
                 </motion.p>
-                <motion.button
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-110"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  Read More
-                </motion.button>
+                <Link href={`/post/${blog._id}`} legacyBehavior>
+                  <motion.a
+                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white cursor-pointer rounded-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-110 text-center"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    Read More
+                  </motion.a>
+                </Link>
               </div>
               <motion.div
                 className="absolute top-4 right-4 p-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full group-hover:scale-105 transition-transform"
@@ -286,48 +296,6 @@ const HomeComponent = () => {
         </div>
       </section>
 
-      {/* Missionary Lessons Section */}
-      <section className="p-8 bg-gradient-to-t from-blue-200 to-white">
-        <h2 className="text-4xl font-heading font-bold text-gray-900 text-center mb-8">
-          Continue Your Journey with These Missionary Lessons
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {lessons.map((lesson, index) => (
-            <motion.div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow transform hover:-translate-y-1"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <div className="relative overflow-hidden">
-                <Image
-                  src={lesson.image}
-                  alt={lesson.title}
-                  width={600}
-                  height={160}
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30"></div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold text-gray-900 font-heading">
-                  {lesson.title}
-                </h3>
-                <p className="text-gray-700 mt-2">{lesson.description}</p>
-                <a
-                  href={lesson.pamphletLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 px-6 py-3 text-white bg-blue-600 rounded-lg shadow-md hover:shadow-lg transition-transform"
-                >
-                  Read More
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* Testimonies Section */}
       <section className="relative bg-gradient-to-t from-blue-100 to-white py-16 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-purple-300 opacity-25 animate-pulse"></div>
@@ -335,35 +303,16 @@ const HomeComponent = () => {
         <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-2000"></div>
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-48 h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-4000"></div>
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl font-heading font-bold text-gray-900 mb-6 gradient-text">
+          <h2 className="text-5xl font-heading font-bold mb-6 gradient-text">
             Inspiring Testimonies
           </h2>
           <p className="text-xl text-gray-700 mb-12">
             Hear from others about the light of Christ in their lives, or share
             your own testimony to uplift others.
           </p>
-          {/* Static Testimonies */}
+          {/* Testimonies List */}
           <div className="relative grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                name: 'Sister Emily',
-                testimony:
-                  'The Plan of Salvation has changed my life and given me hope for eternity.',
-                image: '/images/lesson1.jpg',
-              },
-              {
-                name: 'Brother James',
-                testimony:
-                  'The gospel brought my family together, and I feel closer to Christ every day.',
-                image: '/images/lesson2.jpg',
-              },
-              {
-                name: 'Sister Grace',
-                testimony:
-                  'Through temple ordinances, I’ve found peace and purpose in life.',
-                image: '/images/lesson3.jpg',
-              },
-            ].map((person, idx) => (
+            {testimonies.map((person, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 50 }}
@@ -372,7 +321,10 @@ const HomeComponent = () => {
                 className="p-6 bg-white shadow-lg rounded-xl relative transform hover:scale-105 transition-transform hover:shadow-2xl"
               >
                 <Image
-                  src={person.image}
+                  src={
+                    person.imageUrl ||
+                    'https://res.cloudinary.com/dqsslvhbj/image/upload/v1735818944/uraixwi3obdrpwlzimdv.ico'
+                  }
                   alt={person.name}
                   className="w-16 h-16 rounded-full mx-auto mb-4 shadow-md"
                   width={64}
@@ -398,12 +350,12 @@ const HomeComponent = () => {
 
         {/* Testimony Submission Modal */}
         {showTestimonyModal && (
-          <div className="fixed z-10 inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+          <div className="fixed z-10 inset-0 bg-black bg-opacity-60 flex items-center justify-center overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-lg p-8 shadow-lg max-w-lg w-full"
+              className="bg-white rounded-lg p-6 m-2 md:m-0 shadow-lg max-w-md w-full max-h-screen overflow-y-auto"
             >
               <h3 className="text-2xl font-heading text-gray-900 mb-4">
                 Share Your Testimony
@@ -417,6 +369,8 @@ const HomeComponent = () => {
               <input
                 type="text"
                 id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Your Name"
                 required
@@ -427,12 +381,7 @@ const HomeComponent = () => {
               >
                 Upload Image (Optional)
               </label>
-              <input
-                type="file"
-                id="image"
-                className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Upload Image"
-              />
+              <ImageUpload onUpload={(url) => setImageUrl(url)} />
               <label
                 className="block text-gray-700 font-medium mb-2"
                 htmlFor="testimony"
@@ -441,6 +390,8 @@ const HomeComponent = () => {
               </label>
               <textarea
                 id="testimony"
+                value={testimony}
+                onChange={(e) => setTestimony(e.target.value)}
                 className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Write your testimony here..."
                 required

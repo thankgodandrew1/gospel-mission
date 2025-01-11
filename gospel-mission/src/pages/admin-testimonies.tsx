@@ -1,20 +1,20 @@
 import React from 'react';
 import Layout from ' @/components/Layout';
-import Admin from ' @/components/Admin';
+import AdminTestimonies from ' @/components/AdminTestimonies';
 import Head from 'next/head';
 import Link from 'next/link';
 import withAuth from ' @/hoc/withAuth';
 
 export const siteTitle = 'Admin Page | Gospel Mission';
 
-const AdminPage: React.FC = () => {
+const AdminTestimoniesPage: React.FC = () => {
   return (
     <Layout>
       <Head>
         <title>{siteTitle}</title>
         <meta
           name="description"
-          content="Manage blog posts. - Gospel Mission"
+          content="Learn about the restored gospel and explore the lessons taught by missionaries. - Gospel Mission"
         />
       </Head>
       <div className="p-8">
@@ -23,13 +23,11 @@ const AdminPage: React.FC = () => {
         </h1>
         <div className="mt-8">
           <h2 className="text-2xl font-heading font-semibold mb-4">
-            Manage Testimonies
+            Manage Blog Posts
           </h2>
-          <Link
-            href={`/admin-testimonies?token=${process.env.NEXT_PUBLIC_SECRET_TOKEN}`}
-          >
+          <Link href={`/admin?token=${process.env.NEXT_PUBLIC_SECRET_TOKEN}`}>
             <span className="px-4 py-2 bg-blue-600 font-body text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
-              Go to Testimonies Management
+              Go to Blog Posts Management
             </span>
           </Link>
         </div>
@@ -45,10 +43,10 @@ const AdminPage: React.FC = () => {
             </span>
           </Link>
         </div>
-        <Admin />
+        <AdminTestimonies />
       </div>
     </Layout>
   );
 };
 
-export default withAuth(AdminPage);
+export default withAuth(AdminTestimoniesPage);

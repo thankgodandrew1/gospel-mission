@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import {
   FaFacebook,
@@ -21,20 +22,20 @@ const Footer = () => {
             light to all.
           </p>
         </div>
-        <div>
+        <div className="hidden md:block">
           <h3 className="text-2xl text-white mb-4">Quick Links</h3>
           <ul className="text-gray-400">
             <li className="hover:text-white">
-              <a href="#home">Home</a>
+              <Link href="/home">Home</Link>
             </li>
             <li className="hover:text-white">
-              <a href="#lessons">Lessons</a>
+              <Link href="/lessons">Lessons</Link>
             </li>
             <li className="hover:text-white">
-              <a href="#testimonies">Testimonies</a>
+              <Link href="/testimonies">Testimonies</Link>
             </li>
             <li className="hover:text-white">
-              <a href="#contact">Contact</a>
+              <Link href="#contact">Contact</Link>
             </li>
           </ul>
         </div>
@@ -42,7 +43,7 @@ const Footer = () => {
           <h3 className="text-2xl text-white mb-4">Contact</h3>
           <div className="flex flex-col items-center md:items-start">
             <p className="text-gray-400 mt-2 flex items-center">
-              <FaPhone className="mr-2" /> +234 (123) 456-7890
+              <FaPhone className="mr-2 line-through" /> +234 (123) 456-7890
             </p>
             <p className="text-gray-400 flex items-center whitespace-nowrap">
               <FaEnvelope className="mr-2" />
@@ -86,9 +87,11 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-center text-gray-400 mt-8">
-        <p>© 2025 Elder Andrew. All Rights Reserved.</p>
         <p>
-          Visit{' '}
+          &copy; {new Date().getFullYear()} Elder Andrew. All Rights Reserved.
+        </p>
+        <p>
+          Visit
           <a
             href="https://www.churchofjesuschrist.org"
             className="text-blue-400 hover:underline"
@@ -97,7 +100,7 @@ const Footer = () => {
             ChurchOfJesusChrist.org
           </a>
           <br />
-          Schedule a visit with missionaries{' '}
+          Schedule a visit with missionaries
           <a
             href="https://www.churchofjesuschrist.org/comeuntochrist"
             className="text-blue-400 hover:underline"
@@ -105,6 +108,12 @@ const Footer = () => {
           >
             ComeUntoChrist.org
           </a>
+        </p>
+        <br />
+        <p>
+          Except for those in the testimony section, all images on this site are
+          the exclusive property of The Church of Jesus Christ of Latter-day
+          Saints.
         </p>
       </div>
       <div className="text-center mt-4">
