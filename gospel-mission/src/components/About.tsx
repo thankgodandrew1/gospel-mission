@@ -86,12 +86,12 @@ const About: React.FC = () => {
           ].map((item, index) => (
             <div
               key={index}
-              className="p-6 bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-700 text-white shadow-lg rounded-lg hover:scale-105 transform transition duration-300"
+              className="p-6 bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 text-white shadow-lg rounded-lg hover:scale-105 transform transition duration-300"
             >
               <h3 className="text-lg font-heading font-semibold mb-2">
                 {item.title}
               </h3>
-              <p className="text-sm opacity-90 leading-relaxed">
+              <p className="text-[16px] opacity-90 leading-relaxed">
                 {item.description}
               </p>
             </div>

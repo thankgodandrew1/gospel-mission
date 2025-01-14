@@ -22,9 +22,14 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),

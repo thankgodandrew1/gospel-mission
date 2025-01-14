@@ -26,7 +26,15 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('/api/posts');
+        const token = localStorage.getItem('jwt'); 
+        if (!token) {
+          throw new Error('Token is missing'); 
+        }
+        const response = await axios.get('/api/posts', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setPosts(response.data.posts);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -52,7 +60,16 @@ const AdminPage: React.FC = () => {
   const handleCreatePost = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/posts', newPost);
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+
+      const response = await axios.post('/api/posts', newPost, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPosts([...posts, response.data.post]);
       setNewPost({
         title: '',
@@ -87,9 +104,17 @@ const AdminPage: React.FC = () => {
     e.preventDefault();
     if (!editingPost) return;
     try {
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
       const response = await axios.put(`/api/posts`, {
         ...editingPost,
-        postId: editingPost._id,
+        postId: editingPost._id, 
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       setPosts(
         posts.map((post) =>
@@ -104,7 +129,17 @@ const AdminPage: React.FC = () => {
 
   const handleDeletePost = async (postId: string) => {
     try {
-      await axios.delete(`/api/posts?postId=${postId}`);
+
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+
+      await axios.delete(`/api/posts?postId=${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPosts(posts.filter((post) => post._id !== postId));
       setShowDeleteModal(false);
     } catch (error) {

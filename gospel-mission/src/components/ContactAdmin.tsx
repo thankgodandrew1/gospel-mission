@@ -13,7 +13,9 @@ interface ContactMessage {
 const ContactAdmin: React.FC = () => {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedMessageId, setSelectedMessageId] = useState<string | null>(null);
+  const [selectedMessageId, setSelectedMessageId] = useState<string | null>(
+    null
+  );
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -22,7 +24,15 @@ const ContactAdmin: React.FC = () => {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch('/api/contact');
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+      const res = await fetch('/api/contact', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await res.json();
       if (res.ok) {
         setMessages(data.contacts);
@@ -57,12 +67,22 @@ const ContactAdmin: React.FC = () => {
     if (!selectedMessageId) return;
 
     try {
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
       const res = await fetch(`/api/contact?contactId=${selectedMessageId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (res.ok) {
-        setMessages(messages.filter(message => message._id !== selectedMessageId));
+        setMessages(
+          messages.filter((message) => message._id !== selectedMessageId)
+        );
         toast.success('Message deleted successfully.', {
           position: 'top-right',
           autoClose: 5000,
@@ -114,8 +134,12 @@ const ContactAdmin: React.FC = () => {
     <div className="min-h-screen bg-gray-100 font-body">
       <ToastContainer />
       <section className="py-16 text-center">
-        <h1 className="text-5xl font-bold font-heading">Admin Contact Messages</h1>
-        <p className="mt-4 text-lg text-gray-700">Manage contact messages from users.</p>
+        <h1 className="text-5xl font-bold font-heading">
+          Admin Contact Messages
+        </h1>
+        <p className="mt-4 text-lg text-gray-700">
+          Manage contact messages from users.
+        </p>
       </section>
       <section className="py-12 px-6 md:px-16">
         <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
@@ -168,15 +192,29 @@ const ContactAdmin: React.FC = () => {
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg className="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <svg
+                      className="h-6 w-6 text-red-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      ></path>
                     </svg>
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">Delete Message</h3>
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      Delete Message
+                    </h3>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to delete this message? This action cannot be undone.
+                        Are you sure you want to delete this message? This
+                        action cannot be undone.
                       </p>
                     </div>
                   </div>

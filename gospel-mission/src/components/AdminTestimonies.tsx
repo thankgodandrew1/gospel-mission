@@ -21,17 +21,41 @@ const AdminTestimonies: React.FC = () => {
   }, []);
 
   const fetchTestimonies = async () => {
-    const response = await axios.get('/api/testimonies');
+    const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+    const response = await axios.get('/api/testimonies', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setTestimonies(response.data.testimonies);
   };
 
   const handleApprove = async (id: string) => {
-    await axios.put('/api/testimonies', { id, approved: true });
+    const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+    await axios.put('/api/testimonies', { id, approved: true }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     fetchTestimonies();
   };
 
   const handleDelete = async (id: string) => {
-    await axios.delete(`/api/testimonies?id=${id}`);
+    const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+    await axios.delete(`/api/testimonies?id=${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     fetchTestimonies();
     setShowDeleteModal(false);
   };

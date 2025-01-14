@@ -1,11 +1,9 @@
 import { connectToDatabase } from ' @/lib/dbConnect';
 import Post from ' @/models/Post';
 import { NextApiRequest, NextApiResponse } from 'next';
+import withAuth from ' @/middleware/withAuth';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await connectToDatabase();
 
@@ -24,12 +22,15 @@ export default async function handler(
             { title: { $regex: searchQuery, $options: 'i' } },
             { tags: { $regex: searchQuery, $options: 'i' } },
           ],
-        });
+        }).sort({ createdAt: -1 }); // Sort by creation date in descending order
         return res.status(200).json({ posts });
       } else {
         const limitNumber = parseInt(limit as string) || 12;
         const skipNumber = parseInt(skip as string) || 0;
-        const posts = await Post.find().limit(limitNumber).skip(skipNumber);
+        const posts = await Post.find()
+          .limit(limitNumber)
+          .skip(skipNumber)
+          .sort({ createdAt: -1 }); // Sort by creation date in descending order
         return res.status(200).json({ posts });
       }
     } else if (req.method === 'POST') {
@@ -57,7 +58,6 @@ export default async function handler(
         description,
         tags,
       });
-      console.log(newPost);
       const savedPost = await newPost.save();
       return res.status(201).json({ success: true, post: savedPost });
     } else if (req.method === 'PUT') {
@@ -112,4 +112,6 @@ export default async function handler(
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
+
+export default withAuth(handler);

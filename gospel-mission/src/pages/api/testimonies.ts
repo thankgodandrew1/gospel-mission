@@ -1,11 +1,9 @@
 import { connectToDatabase } from ' @/lib/dbConnect';
 import Testimony from ' @/models/Testimony';
 import { NextApiRequest, NextApiResponse } from 'next';
+import withAuth from ' @/middleware/withAuth';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await connectToDatabase();
 
   switch (req.method) {
@@ -20,7 +18,7 @@ export default async function handler(
     default:
       return res.status(405).json({ error: 'Method not allowed' });
   }
-}
+};
 
 const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
   const { approved, skip = 0, limit = 15 } = req.query;
@@ -54,3 +52,5 @@ const handleDelete = async (req: NextApiRequest, res: NextApiResponse) => {
   await Testimony.findByIdAndDelete(id as string).exec();
   res.status(200).json({ success: true });
 };
+
+export default withAuth(handler);

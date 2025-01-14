@@ -29,7 +29,16 @@ const HomeComponent = () => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch('/api/posts');
+        const token = localStorage.getItem('jwt'); // Get token from localStorage
+        if (!token) {
+          throw new Error('Token is missing'); // Handle missing token
+        }
+        console.log('JWT Token:', token);
+        const response = await fetch('/api/posts', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -50,18 +59,40 @@ const HomeComponent = () => {
   }, []);
 
   const fetchTestimonies = async () => {
-    const response = await axios.get('/api/testimonies?approved=true');
-    const approvedTestimonies: Testimony[] = response.data.testimonies;
-    const randomTestimonies = approvedTestimonies
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-    setTestimonies(randomTestimonies);
+    try {
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+      const response = await axios.get('/api/testimonies?approved=true', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const approvedTestimonies = response.data.testimonies;
+      const randomTestimonies = approvedTestimonies
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
+      setTestimonies(randomTestimonies);
+    } catch (error) {
+      console.error('Error fetching testimonies:', error);
+    }
   };
 
   const handleShareTestimony = async () => {
-    await axios.post('/api/testimonies', { name, testimony, imageUrl });
-    setShowTestimonyModal(false);
-    fetchTestimonies();
+    try {
+      const token = localStorage.getItem('jwt'); 
+      if (!token) {
+        throw new Error('Token is missing'); 
+      }
+      await axios.post(
+        '/api/testimonies',
+        { name, testimony, imageUrl },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setShowTestimonyModal(false);
+      fetchTestimonies();
+    } catch (error) {
+      console.error('Error sharing testimony:', error);
+    }
   };
 
   if (!isClient) {

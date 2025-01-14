@@ -1,11 +1,9 @@
 import { connectToDatabase } from ' @/lib/dbConnect';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Contact from ' @/models/Contact';
+import withAuth from ' @/middleware/withAuth';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await connectToDatabase();
 
@@ -48,4 +46,6 @@ export default async function handler(
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
+
+export default withAuth(handler);

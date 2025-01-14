@@ -53,7 +53,7 @@ export default function Lessons() {
                   alt={lesson.title}
                   width={600}
                   height={200}
-                  className="object-cover w-full  transition-transform duration-300 hover:scale-110"
+                  className="object-cover w-full transition-transform duration-300 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-50"></div>
               </div>
@@ -75,6 +75,33 @@ export default function Lessons() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="mt-10 text-center bg-blue-100 p-6 rounded-lg shadow-md">
+          <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4">
+            Explore More
+          </h3>
+          <p className="text-lg text-gray-700 mb-4">
+            Want to explore more books and resources from the LDS Church?
+            Download the Gospel Library app:
+          </p>
+          <div className="flex justify-center space-x-4">
+            <a
+              href="https://apps.apple.com/us/app/gospel-library/id598329798"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all"
+            >
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=org.lds.ldssa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-green-500 to-green-700 rounded-lg shadow hover:shadow-lg hover:from-green-600 hover:to-green-800 transition-all"
+            >
+              Google Play Store
+            </a>
+          </div>
         </div>
       </section>
     </div>
