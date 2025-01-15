@@ -49,7 +49,15 @@ const BlogPostPage: React.FC = () => {
     const fetchPost = async () => {
       if (id) {
         try {
-          const response = await axios.get(`/api/posts?postId=${id}`);
+          const token = localStorage.getItem('jwt');
+          if (!token) {
+            throw new Error('Token is missing');
+          }
+          const response = await axios.get(`/api/posts?postId=${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setPost(response.data.post);
           setLoading(false);
         } catch (error) {

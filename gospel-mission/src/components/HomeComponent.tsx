@@ -29,11 +29,11 @@ const HomeComponent = () => {
 
     const fetchPosts = async () => {
       try {
-        const token = localStorage.getItem('jwt'); // Get token from localStorage
+        const token = localStorage.getItem('jwt');
         if (!token) {
-          throw new Error('Token is missing'); // Handle missing token
+          throw new Error('Token is missing');
         }
-        console.log('JWT Token:', token);
+        // console.log('JWT Token:', token);
         const response = await fetch('/api/posts', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -244,7 +244,7 @@ const HomeComponent = () => {
       </motion.section>
 
       {/* Featured Blog Posts */}
-      <section className="p-12 bg-gradient-to-t from-blue-300 to-white rounded-xl shadow-2xl mt-10">
+      <section className="p-3 md:p-12 bg-gradient-to-t from-blue-300 to-white rounded-xl shadow-2xl mt-10">
         <h2 className="text-5xl font-heading font-bold text-gray-900 text-center mb-10">
           Featured Blog Posts
         </h2>
@@ -402,7 +402,7 @@ const HomeComponent = () => {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 placeholder="Your Name"
                 required
               />
@@ -423,7 +423,7 @@ const HomeComponent = () => {
                 id="testimony"
                 value={testimony}
                 onChange={(e) => setTestimony(e.target.value)}
-                className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-4 border rounded-lg mb-4 focus:outline-none focus:ring-2 text-black focus:ring-blue-500"
                 placeholder="Write your testimony here..."
                 required
                 rows={5}

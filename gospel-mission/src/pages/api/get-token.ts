@@ -7,17 +7,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    // Issue a JWT with a fixed payload (e.g., "role: client")
     const secret = process.env.JWT_SECRET;
     if (!secret) {
       throw new Error('JWT_SECRET is not defined');
     }
 
-    const token = jwt.sign(
-      { role: 'client' }, // Payload
-      secret, // Secret key
-      { expiresIn: '1h' } // Token expiry
-    );
+    const token = jwt.sign({ role: 'client' }, secret, { expiresIn: '1h' });
 
     return res.status(200).json({ token });
   } catch (error) {

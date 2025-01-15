@@ -81,7 +81,7 @@ const Header = () => {
           </Link>
           <Link href="/blog" legacyBehavior>
             <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
-              Blog
+              Read
             </button>
           </Link>
           <Link href="/lessons" legacyBehavior>

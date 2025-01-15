@@ -11,7 +11,7 @@ const OfflinePopup: React.FC<OfflinePopupProps> = ({ message }) => {
       <p>{message}</p>
     </div>
   );
-}; 
+};
 
 interface ErrorBoundaryProps {
   children: ReactNode;

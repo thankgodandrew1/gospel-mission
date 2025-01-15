@@ -10,6 +10,6 @@ const OfflinePopup: React.FC<OfflinePopupProps> = ({ message }) => {
       <p>{message}</p>
     </div>
   );
-}; 
+};
 
 export default OfflinePopup;

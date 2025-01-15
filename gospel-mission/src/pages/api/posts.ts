@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             { title: { $regex: searchQuery, $options: 'i' } },
             { tags: { $regex: searchQuery, $options: 'i' } },
           ],
-        }).sort({ createdAt: -1 }); // Sort by creation date in descending order
+        }).sort({ createdAt: -1 }); // sort by creation date in descending order
         return res.status(200).json({ posts });
       } else {
         const limitNumber = parseInt(limit as string) || 12;

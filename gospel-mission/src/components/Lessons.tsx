@@ -84,12 +84,12 @@ export default function Lessons() {
             Want to explore more books and resources from The Church of Jesus
             Christ of Latter-day Saints? Download the Gospel Library app:
           </p>
-          <div className="flex justify-center space-x-4">
+          <div className="flex flex-col items-center space-y-4 md:flex-row md:justify-center md:space-x-4 md:space-y-0">
             <a
               href="https://apps.apple.com/us/app/gospel-library/id598329798"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all"
+              className="block w-full md:w-auto px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all"
             >
               App Store
             </a>
@@ -97,7 +97,7 @@ export default function Lessons() {
               href="https://play.google.com/store/apps/details?id=org.lds.ldssa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-green-500 to-green-700 rounded-lg shadow hover:shadow-lg hover:from-green-600 hover:to-green-800 transition-all"
+              className="block w-full md:w-auto px-6 py-3 text-lg font-medium text-white bg-gradient-to-r from-green-500 to-green-700 rounded-lg shadow hover:shadow-lg hover:from-green-600 hover:to-green-800 transition-all"
             >
               Google Play Store
             </a>

@@ -21,7 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   if (!isTokenReady) {
-    // Show a loading state until the token is ready
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-300">
         <LoadingSpinner />
