@@ -21,10 +21,10 @@ const AdminTestimonies: React.FC = () => {
   }, []);
 
   const fetchTestimonies = async () => {
-    const token = localStorage.getItem('jwt'); 
-      if (!token) {
-        throw new Error('Token is missing'); 
-      }
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      throw new Error('Token is missing');
+    }
     const response = await axios.get('/api/testimonies', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -34,23 +34,27 @@ const AdminTestimonies: React.FC = () => {
   };
 
   const handleApprove = async (id: string) => {
-    const token = localStorage.getItem('jwt'); 
-      if (!token) {
-        throw new Error('Token is missing'); 
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      throw new Error('Token is missing');
+    }
+    await axios.put(
+      '/api/testimonies',
+      { id, approved: true },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    await axios.put('/api/testimonies', { id, approved: true }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    );
     fetchTestimonies();
   };
 
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem('jwt'); 
-      if (!token) {
-        throw new Error('Token is missing'); 
-      }
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      throw new Error('Token is missing');
+    }
     await axios.delete(`/api/testimonies?id=${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,

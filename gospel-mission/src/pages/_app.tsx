@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 import { fetchAndStoreToken, getToken } from ' @/utils/tokenManager';
 import LoadingSpinner from ' @/components/LoadingSpinner';
+import ErrorBoundary from ' @/components/ErrorBoundary';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isTokenReady, setIsTokenReady] = useState(false);
@@ -28,7 +29,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
 
-  return <Component {...pageProps} />;
+  return (
+    <ErrorBoundary error="You are offline. Please check your internet connection.">
+      <Component {...pageProps} />
+    </ErrorBoundary>
+  );
 }
 
 export default MyApp;

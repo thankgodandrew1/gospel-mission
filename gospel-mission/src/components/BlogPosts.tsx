@@ -22,12 +22,13 @@ const BlogPosts: React.FC = () => {
     const loadPosts = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem('jwt'); 
+        const token = localStorage.getItem('jwt');
         if (!token) {
-          throw new Error('Token is missing'); 
+          throw new Error('Token is missing');
         }
         const response = await axios.get(
-          `/api/posts?limit=${limit}&skip=${skip}` , {
+          `/api/posts?limit=${limit}&skip=${skip}`,
+          {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -66,9 +67,9 @@ const BlogPosts: React.FC = () => {
 
     try {
       setLoading(true);
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
       const response = await axios.get(`/api/posts?search=${query}`, {
         headers: {

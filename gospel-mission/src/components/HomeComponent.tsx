@@ -60,9 +60,9 @@ const HomeComponent = () => {
 
   const fetchTestimonies = async () => {
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
       const response = await axios.get('/api/testimonies?approved=true', {
         headers: { Authorization: `Bearer ${token}` },
@@ -79,9 +79,9 @@ const HomeComponent = () => {
 
   const handleShareTestimony = async () => {
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
       await axios.post(
         '/api/testimonies',

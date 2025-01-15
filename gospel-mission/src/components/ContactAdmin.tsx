@@ -24,9 +24,9 @@ const ContactAdmin: React.FC = () => {
 
   const fetchMessages = async () => {
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
       const res = await fetch('/api/contact', {
         headers: {
@@ -67,9 +67,9 @@ const ContactAdmin: React.FC = () => {
     if (!selectedMessageId) return;
 
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
       const res = await fetch(`/api/contact?contactId=${selectedMessageId}`, {
         method: 'DELETE',

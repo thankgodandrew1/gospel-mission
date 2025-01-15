@@ -26,9 +26,9 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const token = localStorage.getItem('jwt'); 
+        const token = localStorage.getItem('jwt');
         if (!token) {
-          throw new Error('Token is missing'); 
+          throw new Error('Token is missing');
         }
         const response = await axios.get('/api/posts', {
           headers: {
@@ -60,9 +60,9 @@ const AdminPage: React.FC = () => {
   const handleCreatePost = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
 
       const response = await axios.post('/api/posts', newPost, {
@@ -104,18 +104,22 @@ const AdminPage: React.FC = () => {
     e.preventDefault();
     if (!editingPost) return;
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
-      const response = await axios.put(`/api/posts`, {
-        ...editingPost,
-        postId: editingPost._id, 
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.put(
+        `/api/posts`,
+        {
+          ...editingPost,
+          postId: editingPost._id,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setPosts(
         posts.map((post) =>
           post._id === editingPost._id ? response.data.post : post
@@ -129,10 +133,9 @@ const AdminPage: React.FC = () => {
 
   const handleDeletePost = async (postId: string) => {
     try {
-
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
 
       await axios.delete(`/api/posts?postId=${postId}`, {

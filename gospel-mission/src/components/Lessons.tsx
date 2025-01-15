@@ -81,8 +81,8 @@ export default function Lessons() {
             Explore More
           </h3>
           <p className="text-lg text-gray-700 mb-4">
-            Want to explore more books and resources from the LDS Church?
-            Download the Gospel Library app:
+            Want to explore more books and resources from The Church of Jesus
+            Christ of Latter-day Saints? Download the Gospel Library app:
           </p>
           <div className="flex justify-center space-x-4">
             <a

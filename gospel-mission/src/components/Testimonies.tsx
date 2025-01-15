@@ -27,15 +27,17 @@ const Testimonies: React.FC = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem('jwt'); 
+      const token = localStorage.getItem('jwt');
       if (!token) {
-        throw new Error('Token is missing'); 
+        throw new Error('Token is missing');
       }
       const response = await axios.get(
-        `/api/testimonies?approved=true&skip=${skip}&limit=${limit}` , {
+        `/api/testimonies?approved=true&skip=${skip}&limit=${limit}`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
-        }}
+          },
+        }
       );
       const newTestimonies = response.data.testimonies;
 
