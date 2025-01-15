@@ -102,7 +102,7 @@ const BlogPosts: React.FC = () => {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="Search by title or tag..."
-            className="w-full px-4 py-3 pl-12 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg transition duration-300 ease-in-out bg-white hover:bg-gray-50"
+            className="w-full px-4 py-3 pl-12 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg text-black transition duration-300 ease-in-out bg-white hover:bg-gray-50"
           />
           <FontAwesomeIcon
             icon={faSearch}

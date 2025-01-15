@@ -140,7 +140,7 @@ const BlogPostPage: React.FC = () => {
             />
           </div>
         )}
-        <h1 className="text-4xl md:text-5xl font-bold mb-2 text-center font-heading">
+        <h1 className="text-4xl text-black md:text-5xl font-bold mb-2 text-center font-heading">
           {post?.title}
         </h1>
         <p className="text-gray-700 mb-8 text-center text-xl">
