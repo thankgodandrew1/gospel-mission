@@ -105,7 +105,7 @@ const BlogPostPage: React.FC = () => {
         className="fixed top-0 left-0 w-full h-1 bg-blue-500 z-50"
         style={{ width: `${readingProgress}%` }}
       ></div>
-      <div className="container mx-auto p-6 md:p-8 font-body transition duration-500">
+      <div className="container mx-auto p-6 md:p-8 font-body bg-white transition duration-500">
         <div className="flex justify-between items-center mb-4">
           <nav className="text-gray-600">
             <Link href="/blog" passHref>
@@ -144,10 +144,10 @@ const BlogPostPage: React.FC = () => {
           {post?.title}
         </h1>
         <p className="text-gray-700 mb-8 text-center text-xl">
-          By <span className="font-semibold">{post?.author}</span> |
+          By <span className="font-semibold">{post?.author}</span> |{' '}
           {new Date(post?.publishDate || '').toLocaleDateString()}
         </p>
-        <div className="prose lg:prose-xl mx-auto p-6 rounded-lg shadow-lg transition-all duration-500">
+        <div className="prose bg-white lg:prose-xl mx-auto p-6 rounded-lg shadow-lg transition-all duration-500">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
