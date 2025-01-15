@@ -61,7 +61,7 @@ The Gospel Mission website features:
 
 ## Usage
 - Navigate to `http://localhost:3000` to view the site.
-- Use the admin pages to create and manage blog posts.
+- Use the admin pages for management purposes.
 
 ## Site Structure
 1. **Home Page**: 
