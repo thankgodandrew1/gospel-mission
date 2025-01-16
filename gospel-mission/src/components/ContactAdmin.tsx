@@ -160,9 +160,15 @@ const ContactAdmin: React.FC = () => {
                 <tbody>
                   {messages.map((message) => (
                     <tr key={message._id}>
-                      <td className="py-2 px-4 border-b text-[18px]">{message.name}</td>
-                      <td className="py-2 px-4 border-b text-[18px]">{message.email}</td>
-                      <td className="py-2 px-4 border-b text-[18px]">{message.message}</td>
+                      <td className="py-2 px-4 border-b text-[18px]">
+                        {message.name}
+                      </td>
+                      <td className="py-2 px-4 border-b text-[18px]">
+                        {message.email}
+                      </td>
+                      <td className="py-2 px-4 border-b text-[18px]">
+                        {message.message}
+                      </td>
                       <td className="py-2 px-4 border-b">
                         <button
                           onClick={() => openDeleteModal(message._id)}

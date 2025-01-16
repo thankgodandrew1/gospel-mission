@@ -9,9 +9,11 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FaTwitter, FaCopy } from 'react-icons/fa';
+import { FaCopy } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const useReadingProgress = () => {
   const [readingProgress, setReadingProgress] = useState(0);
@@ -116,10 +118,11 @@ const BlogPostPage: React.FC = () => {
           <div className="flex space-x-2">
             <button
               onClick={shareOnTwitter}
-              className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+              className="p-2 bg-[#1DA1F2] text-white rounded-full hover:bg-[#1A91DA] transition-colors"
             >
-              <FaTwitter />
+              <FontAwesomeIcon icon={faXTwitter} />
             </button>
+
             <button
               onClick={copyLink}
               className="p-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors"

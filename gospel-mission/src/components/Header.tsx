@@ -10,7 +10,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-blue-500 to-purple-600 font-heading text-white p-6 flex justify-between items-center shadow-lg relative z-10">
+    <header className="bg-gradient-to-r from-blue-500 to-purple-600 font-heading text-white p-3 md:p-6 flex justify-between items-center shadow-lg relative z-10">
       <div className="flex items-center space-x-4">
         <Link href="/" legacyBehavior>
           <a className="cursor-pointer rounded-full hover:scale-110 transition-transform duration-300">
@@ -23,9 +23,11 @@ const Header = () => {
             />
           </a>
         </Link>
-        <span className="text-3xl font-bold tracking-wide hover:text-purple-300 transition-colors duration-300 cursor-default">
-          Gospel Mission
-        </span>
+        <Link href="/" legacyBehavior>
+          <span className="cursor-pointer text-2xl md:text-3xl font-bold tracking-wide hover:text-purple-300 transition-colors duration-300">
+            Gospel Mission
+          </span>
+        </Link>
       </div>
       <nav className="hidden md:flex space-x-6 text-lg items-center">
         <Link href="/" legacyBehavior>
@@ -73,34 +75,34 @@ const Header = () => {
         </button>
       </div>
       {isOpen && (
-        <nav className="md:hidden absolute top-full left-0 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 flex flex-col space-y-2 z-20">
+        <nav className="md:hidden absolute top-full left-0 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 flex flex-col space-y-2 z-20 font-extrabold text-center">
           <Link href="/" legacyBehavior>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               Home
             </button>
           </Link>
           <Link href="/blog" legacyBehavior>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               Read
             </button>
           </Link>
           <Link href="/lessons" legacyBehavior>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               Lessons
             </button>
           </Link>
           <Link href="/testimonies" legacyBehavior>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               Testimonies
             </button>
           </Link>
           <Link href="/about" legacyBehavior>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               About
             </button>
           </Link>
           <Link href="/contact" legacyBehavior>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full text-left">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               Contact
             </button>
           </Link>
