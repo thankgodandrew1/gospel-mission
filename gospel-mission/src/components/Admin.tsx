@@ -164,17 +164,18 @@ const AdminPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-8 max-w-6xl font-body mt-5 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 rounded-lg shadow-xl border border-gray-700">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
+    <div className='bg-white m-[-7px]'>
+    <div className="container mx-auto p-3 max-w-6xl font-body mt-5 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 rounded-lg shadow-xl border border-gray-700">
+      <h1 className="text-3xl md:text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
         Post Management Dashboard
       </h1>
 
       {/* Create Post Form */}
       <form
         onSubmit={handleCreatePost}
-        className="mb-12 p-8 bg-gray-800 rounded-lg shadow-md"
+        className="mb-12 p-3 bg-gray-800 rounded-lg shadow-md"
       >
-        <h2 className="text-3xl font-semibold mb-6 text-teal-300">
+        <h2 className="text-2xl md:3xl font-semibold mb-6 text-teal-300">
           Create New Post
         </h2>
         {/* Form Fields */}
@@ -314,10 +315,10 @@ const AdminPage: React.FC = () => {
             />
           </div>
         </div>
-        <div className="flex justify-end">
+        <div>
           <button
             type="submit"
-            className="bg-gradient-to-r from-blue-500 to-teal-500 text-white py-2 px-5 rounded-md shadow-md hover:from-blue-600 hover:to-teal-600 transition-all"
+            className="w-full md:flex md:justify-start md:w-[12%] text-center bg-gradient-to-r from-blue-500 to-teal-500 text-white py-2 px-5 rounded-md shadow-md hover:from-blue-600 hover:to-teal-600 transition-all"
           >
             Create Post
           </button>
@@ -490,12 +491,12 @@ const AdminPage: React.FC = () => {
       )}
       {/* Existing Posts Section */}
       <hr />
-      <h2 className="text-3xl font-semibold mt-5 mb-6 text-teal-300">
+      <h2 className="text-2xl md:text-3xl font-semibold mt-5 mb-6 text-teal-300">
         Existing Posts
       </h2>
-      <ul className="space-y-6 m-4">
+      <ul className="space-y-6 m-0 md:m-4">
         {posts.map((post) => (
-          <li key={post._id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <li key={post._id} className="bg-gray-800 p-3 rounded-lg shadow-lg">
             <h3 className="text-2xl font-bold text-teal-400 mb-2">
               {post.title}
             </h3>
@@ -553,6 +554,7 @@ const AdminPage: React.FC = () => {
           </motion.div>
         </div>
       )}
+    </div>
     </div>
   );
 };

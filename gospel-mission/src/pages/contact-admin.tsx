@@ -17,7 +17,7 @@ const ContactAdminPage: React.FC = () => {
           content="Manage contact messages from users. - Gospel Mission"
         />
       </Head>
-      <div className="p-8">
+      <div className="p-2 md:p-8">
         <h1 className="text-3xl font-bold mb-6 font-heading">
           Admin Dashboard
         </h1>

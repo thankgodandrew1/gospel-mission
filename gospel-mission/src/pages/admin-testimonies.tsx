@@ -17,7 +17,7 @@ const AdminTestimoniesPage: React.FC = () => {
           content="Learn about the restored gospel and explore the lessons taught by missionaries. - Gospel Mission"
         />
       </Head>
-      <div className="p-8">
+      <div className="p-3 md:p-8">
         <h1 className="text-3xl font-bold mb-6 font-heading">
           Admin Dashboard
         </h1>

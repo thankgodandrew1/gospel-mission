@@ -131,7 +131,7 @@ const ContactAdmin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 font-body">
+    <div className="min-h-screen bg-gray-100 font-body text-black">
       <ToastContainer />
       <section className="py-16 text-center">
         <h1 className="text-5xl font-bold font-heading">
@@ -141,7 +141,7 @@ const ContactAdmin: React.FC = () => {
           Manage contact messages from users.
         </p>
       </section>
-      <section className="py-12 px-6 md:px-16">
+      <section className="py-12 px-2 md:px-16">
         <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-8">Messages</h2>
           {isLoading ? (
@@ -160,13 +160,13 @@ const ContactAdmin: React.FC = () => {
                 <tbody>
                   {messages.map((message) => (
                     <tr key={message._id}>
-                      <td className="py-2 px-4 border-b">{message.name}</td>
-                      <td className="py-2 px-4 border-b">{message.email}</td>
-                      <td className="py-2 px-4 border-b">{message.message}</td>
+                      <td className="py-2 px-4 border-b text-[18px]">{message.name}</td>
+                      <td className="py-2 px-4 border-b text-[18px]">{message.email}</td>
+                      <td className="py-2 px-4 border-b text-[18px]">{message.message}</td>
                       <td className="py-2 px-4 border-b">
                         <button
                           onClick={() => openDeleteModal(message._id)}
-                          className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition duration-200"
+                          className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition duration-200 text-[18px]"
                         >
                           Delete
                         </button>

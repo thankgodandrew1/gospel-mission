@@ -78,7 +78,7 @@ const AdminTestimonies: React.FC = () => {
         {testimonies.map((testimony) => (
           <li
             key={testimony._id}
-            className="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row md:items-center justify-between border-l-4 border-blue-500"
+            className="bg-white mx-[-20px] p-6 rounded-lg shadow-md flex flex-col md:flex-row md:items-center justify-between border-l-4 border-blue-500"
           >
             <div className="flex flex-col items-center mb-4 md:flex-row md:mb-0 md:flex-1">
               <Image

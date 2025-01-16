@@ -1,7 +1,7 @@
 import ' @/styles/globals.css';
 import { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
-import { fetchAndStoreToken, getToken } from ' @/utils/tokenManager';
+import { getToken } from ' @/utils/tokenManager';
 import LoadingSpinner from ' @/components/LoadingSpinner';
 import ErrorBoundary from ' @/components/ErrorBoundary';
 
@@ -10,11 +10,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const initializeToken = async () => {
-      const token = getToken();
+      const token = await getToken(); // Get a valid token (handles refresh if expired)
       if (!token) {
-        await fetchAndStoreToken();
+        console.error('Unable to fetch a valid token');
       }
-      setIsTokenReady(true);
+      setIsTokenReady(true); // Proceed after token is ready
     };
 
     initializeToken();
