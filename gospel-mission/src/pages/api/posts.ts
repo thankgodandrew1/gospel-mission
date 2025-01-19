@@ -37,12 +37,12 @@ const notifySubscribers = async (post: Post) => {
           ${
             post.image
               ? `<img src="${post.image}" alt="${post.title}" style="display: block; margin: 20px auto; max-width: 100%; height: auto; border-radius: 8px;" />`
-              : ""
+              : ''
           }
           <p style="margin-top: 20px;">${post.description}</p>
           <p style="margin-top: 20px; font-style: italic; color: #555;">Written by: <strong>${post.author}</strong></p>
           <a href="https://gospel-mission.vercel.app/post/${post.slug}" 
-             style="display: inline-block; margin-top: 20px; background-color: #4CAF50; color: white; text-decoration: none; padding: 12px 20px; border-radius: 5px; text-align: center; font-weight: bold; font-family: 'Roboto', Arial, sans-serif;">
+             style="display: inline-block; margin-top: 20px; background-color: #2980b9; color: white; text-decoration: none; padding: 12px 20px; border-radius: 5px; text-align: center; font-weight: bold; font-family: 'Roboto', Arial, sans-serif;">
             Read More
           </a>
           <footer style="margin-top: 30px; font-size: 12px; text-align: center; color: #999;">
@@ -53,8 +53,6 @@ const notifySubscribers = async (post: Post) => {
     });
   }
 };
-
-
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

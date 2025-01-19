@@ -100,23 +100,23 @@ const HomeComponent = () => {
         });
         throw new Error('Token is missing');
       }
-  
+
       const response = await axios.post(
         '/api/testimonies',
         { name, testimony, imageUrl },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
+
       if (response.status === 200 || response.status === 201) {
         setNotification({
           message: 'Testimony shared successfully!',
           type: 'success',
         });
-  
+
         setShowTestimonyModal(false);
-        // Clear form fields 
-        setName(''); 
-        setImageUrl(''); 
+        // Clear form fields
+        setName('');
+        setImageUrl('');
         setTestimony('');
         fetchTestimonies();
       } else {
@@ -125,7 +125,6 @@ const HomeComponent = () => {
           type: 'error',
         });
       }
-  
     } catch (error) {
       console.error('Error sharing testimony:', error);
       setNotification({
@@ -134,7 +133,6 @@ const HomeComponent = () => {
       });
     }
   };
-  
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();

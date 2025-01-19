@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SubscriptionModalProps {
   showModal: boolean;
@@ -25,7 +25,6 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         <div className="absolute top-0 left-0 w-48 h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob"></div>{' '}
         <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-2000"></div>{' '}
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-48 h-48 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-4000"></div>
-       
         <div className="relative z-10 w-full font-body">
           <div className="flex justify-end">
             <button
@@ -39,9 +38,13 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             Subscribe to Our Blog
           </h3>
           <p className="mb-4 text-lg text-gray-700 text-center">
-            Stay updated with our latest blog posts. Subscribe now to get notifications directly to your inbox!
+            Stay updated with our latest blog posts. Subscribe now to get
+            notifications directly to your inbox!
           </p>
-          <form onSubmit={handleSubscribe} className="flex flex-col items-center w-full">
+          <form
+            onSubmit={handleSubscribe}
+            className="flex flex-col items-center w-full"
+          >
             <input
               type="email"
               className="p-4 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-purple-500 w-full"
