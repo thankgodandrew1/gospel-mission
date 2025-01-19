@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         <div style="text-align: center; font-family: 'Roboto', sans-serif; padding: 20px; background: #1f1f1f; color: #f5f5f5; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
             <h2 style="font-size: 24px; font-weight: 700; color: #00b894; text-transform: uppercase; letter-spacing: 1.5px;">You have been unsubscribed.</h2>
             <p style="font-size: 16px; line-height: 1.6; color: #dfe6e9;">We’re sorry to see you go. If this was a mistake, feel free to subscribe again!</p>
-            <a href="https://example.com/re-subscribe" style="display: inline-block; margin-top: 20px; padding: 10px 20px; font-size: 16px; text-transform: uppercase; color: #1f1f1f; background: #00b894; border: none; border-radius: 5px; text-decoration: none; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">Re-subscribe</a>
+            <a href="https://gospel-mission.vercel.app/" style="display: inline-block; margin-top: 20px; padding: 10px 20px; font-size: 16px; text-transform: uppercase; color: #1f1f1f; background: #00b894; border: none; border-radius: 5px; text-decoration: none; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">Re-subscribe</a>
         </div>
 
       `);
