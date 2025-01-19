@@ -132,6 +132,8 @@ const HomeComponent = () => {
         type: 'error',
       });
     }
+    // Clear message after some time
+    setTimeout(() => setNotification({ message: '', type: '' }), 3000);
   };
 
   const handleSubscribe = async (e: React.FormEvent) => {
