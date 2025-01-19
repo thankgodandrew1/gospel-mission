@@ -42,20 +42,20 @@ const useReadingProgress = () => {
 
 const BlogPostPage: React.FC = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { slug } = router.query;
   const [post, setPost] = useState<IPost | null>(null);
   const [loading, setLoading] = useState(true);
   const readingProgress = useReadingProgress();
 
   useEffect(() => {
     const fetchPost = async () => {
-      if (id) {
+      if (slug) {
         try {
           const token = localStorage.getItem('jwt');
           if (!token) {
             throw new Error('Token is missing');
           }
-          const response = await axios.get(`/api/posts?postId=${id}`, {
+          const response = await axios.get(`/api/posts?postId=${slug}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -70,7 +70,7 @@ const BlogPostPage: React.FC = () => {
     };
 
     fetchPost();
-  }, [id]);
+  }, [slug]);
 
   const shareOnTwitter = () => {
     const url = encodeURIComponent(window.location.href);
@@ -94,6 +94,45 @@ const BlogPostPage: React.FC = () => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-body text-center p-4">
+        <Image
+          src="/images/post-404-image.svg"
+          alt="404 - Not Found"
+          width={300}
+          height={300}
+          className="mb-8"
+        />
+        <h1 className="text-5xl font-bold font-heading text-gray-800 mb-4">
+          404 - Post Not Found
+        </h1>
+        <p className="text-lg text-gray-600 mb-8">
+          Sorry, the post you are looking for could not be found. It might have
+          been removed, renamed, or temporarily unavailable. Please check the
+          URL for any errors or try searching for the post using the{' '}
+          <b>
+            <Link href="/blog" className="underline text-blue-900 pr-1">
+              search bar.
+            </Link>
+          </b>
+          If you believe this is an error, feel free to{' '}
+          <b>
+            <Link href="/contact" className="underline text-blue-900 pr-1">
+              contact us
+            </Link>
+          </b>{' '}
+          or return to the homepage to continue browsing.
+        </p>
+        <Link href="/">
+          <span className="px-6 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition">
+            Go Back Home
+          </span>
+        </Link>
       </div>
     );
   }

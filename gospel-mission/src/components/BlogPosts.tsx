@@ -117,7 +117,7 @@ const BlogPosts: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href={`/post/${post._id}`} legacyBehavior>
+              <Link href={`/post/${post.slug}`} legacyBehavior>
                 <a>
                   {post.image && (
                     <Image
@@ -152,7 +152,7 @@ const BlogPosts: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.4 }}
                     >
-                      By {post.author} |
+                      By {post.author} |{' '}
                       {new Date(post.publishDate).toLocaleDateString()}
                     </motion.p>
                     <motion.button
