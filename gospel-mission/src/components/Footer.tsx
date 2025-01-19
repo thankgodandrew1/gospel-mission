@@ -2,11 +2,11 @@ import Link from 'next/link';
 import React from 'react';
 import {
   FaFacebook,
-  FaTwitter,
+  // FaTwitter,
   FaInstagram,
   FaYoutube,
   FaEnvelope,
-  FaPhone,
+  // FaPhone,
 } from 'react-icons/fa';
 
 const Footer = () => {
@@ -45,9 +45,9 @@ const Footer = () => {
         <div>
           <h3 className="text-2xl text-white mb-4">Contact</h3>
           <div className="flex flex-col items-center md:items-start">
-            <p className="text-gray-400 mt-2 flex items-center">
+            {/* <p className="text-gray-400 mt-2 flex items-center">
               <FaPhone className="mr-2 line-through" /> +234 (123) 456-7890
-            </p>
+            </p> */}
             <p className="text-gray-400 flex items-center whitespace-nowrap">
               <FaEnvelope className="mr-2" />
               <a
@@ -68,12 +68,12 @@ const Footer = () => {
             >
               <FaFacebook size={24} />
             </a>
-            <a
+            {/* <a
               href="https://www.twitter.com"
               className="text-blue-400 hover:text-white transform hover:scale-110 transition-transform"
             >
               <FaTwitter size={24} />
-            </a>
+            </a> */}
             <a
               href="https://www.instagram.com"
               className="text-pink-600 hover:text-white transform hover:scale-110 transition-transform"
