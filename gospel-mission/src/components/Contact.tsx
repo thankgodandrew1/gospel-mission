@@ -196,7 +196,9 @@ const Contact: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold">Contact Information</h2>
           <p className="text-lg text-gray-300 mt-6">
-            Feel free to reach out using the information below:
+            Feel free to reach out using the information below, if you have any
+            inspiring stories or blog post to share, questions, or need help
+            with anything:
           </p>
           <div className="mt-8 space-y-4">
             <p className="line-through">

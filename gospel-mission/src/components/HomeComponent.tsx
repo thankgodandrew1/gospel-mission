@@ -40,43 +40,62 @@ const HomeComponent = () => {
       localStorage.setItem('firstVisit', 'false');
     }
 
-    const fetchPosts = async () => {
-      try {
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-          throw new Error('Token is missing');
-        }
-        // console.log('JWT Token:', token);
-        const response = await fetch('/api/posts', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-
-        const shuffled = data.posts.sort(() => 0.5 - Math.random());
-        setFeaturedBlogs(shuffled.slice(0, 6));
-
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-        setLoading(false);
-      }
-    };
-
     fetchPosts();
     fetchTestimonies();
   }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const token = localStorage.getItem('jwt');
+      if (!token) {
+        setNotification({
+          message: 'User token is missing while fetching posts!',
+          type: 'error',
+        });
+        throw new Error('Token is missing');
+      }
+
+      const response = await fetch('/api/posts', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        setNotification({
+          message: 'Failed to fetch posts. Please try again.',
+          type: 'error',
+        });
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      const shuffled = data.posts.sort(() => 0.5 - Math.random());
+      setFeaturedBlogs(shuffled.slice(0, 6));
+
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      setLoading(false);
+      setNotification({
+        message: 'An error occurred while fetching posts.',
+        type: 'error',
+      });
+    }
+    // Clear notification after some time
+    setTimeout(() => setNotification({ message: '', type: '' }), 3000);
+  };
 
   const fetchTestimonies = async () => {
     try {
       const token = localStorage.getItem('jwt');
       if (!token) {
+        setNotification({
+          message: 'User token is missing while fetching testimonies!',
+          type: 'error',
+        });
         throw new Error('Token is missing');
       }
+
       const response = await axios.get('/api/testimonies?approved=true', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -87,7 +106,13 @@ const HomeComponent = () => {
       setTestimonies(randomTestimonies);
     } catch (error) {
       console.error('Error fetching testimonies:', error);
+      setNotification({
+        message: 'Failed to fetch testimonies. Please try again.',
+        type: 'error',
+      });
     }
+    // Clear notification after some time
+    setTimeout(() => setNotification({ message: '', type: '' }), 3000);
   };
 
   const handleShareTestimony = async () => {
@@ -580,6 +605,10 @@ const HomeComponent = () => {
           <h3 className="text-3xl font-heading font-bold mb-4 gradient-text">
             Subscribe to Our Blog
           </h3>
+          <p className="mb-4 text-lg text-gray-700 text-center">
+            Stay updated with our latest blog posts. Subscribe now to get
+            notifications directly to your inbox!
+          </p>
           <form
             onSubmit={handleSubscribe}
             className="flex flex-col items-center"
