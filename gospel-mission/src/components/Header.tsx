@@ -75,7 +75,7 @@ const Header = () => {
         </button>
       </div>
       {isOpen && (
-        <nav className="md:hidden absolute top-full left-0 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 flex flex-col space-y-2 z-20 font-extrabold text-center">
+        <nav className="md:hidden absolute top-full left-0 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 flex flex-col space-y-2 z-50 font-extrabold text-center">
           <Link href="/" legacyBehavior>
             <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition duration-300 ease-in-out w-full">
               Home

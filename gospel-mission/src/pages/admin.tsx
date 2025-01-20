@@ -4,6 +4,7 @@ import Admin from ' @/components/Admin';
 import Head from 'next/head';
 import Link from 'next/link';
 import withAuth from ' @/hoc/withAuth';
+import SubscriberCount from ' @/components/SubscriberCount';
 
 export const siteTitle = 'Admin Page | Gospel Mission';
 
@@ -45,6 +46,7 @@ const AdminPage: React.FC = () => {
             </span>
           </Link>
         </div>
+        <SubscriberCount />
         <Admin />
       </div>
     </Layout>
