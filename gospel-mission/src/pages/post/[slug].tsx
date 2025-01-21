@@ -73,13 +73,18 @@ const BlogPostPage: React.FC = () => {
   }, [slug]);
 
   const shareOnTwitter = () => {
+    if (!post) return; 
+  
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent(post?.title || 'Check out this post!');
+    const image = encodeURIComponent(post?.image || 'https://res.cloudinary.com/dqsslvhbj/image/upload/v1735818944/uraixwi3obdrpwlzimdv.ico'); // Default image fallback
+    
     window.open(
-      `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+      `https://twitter.com/intent/tweet?url=${url}&text=${text}&image=${image}`,
       '_blank'
     );
   };
+  
 
   const copyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -140,7 +145,57 @@ const BlogPostPage: React.FC = () => {
   return (
     <Layout>
       <Head>
+        {/* Dynamic Page Title */}
         <title>{post?.title ? post.title : 'Loading...'}</title>
+        <meta
+          name="description"
+          content={
+            post?.description ||
+            'Read this inspiring blog post on Gospel Mission.'
+          }
+        />
+
+        {/* Open Graph Metadata */}
+        <meta property="og:title" content={post?.title || 'Blog Post'} />
+        <meta
+          property="og:description"
+          content={
+            post?.description ||
+            'Read this inspiring blog post on Gospel Mission.'
+          }
+        />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={window.location.href} />
+        <meta
+          property="og:image"
+          content={
+            post?.image ||
+            'https://res.cloudinary.com/dqsslvhbj/image/upload/v1735818944/uraixwi3obdrpwlzimdv.ico'
+          }
+        />
+        <meta property="og:image:alt" content="Blog Post Image" />
+
+        {/* Twitter Metadata */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post?.title || 'Blog Post'} />
+        <meta
+          name="twitter:description"
+          content={
+            post?.description ||
+            'Read this inspiring blog post on Gospel Mission.'
+          }
+        />
+        <meta
+          name="twitter:image"
+          content={
+            post?.image ||
+            'https://res.cloudinary.com/dqsslvhbj/image/upload/v1735818944/uraixwi3obdrpwlzimdv.ico'
+          }
+        />
+        <meta name="twitter:image:alt" content="Blog Post Image" />
+
+        {/* Canonical Link */}
+        <link rel="canonical" href={window.location.href} />
       </Head>
       <div
         className="fixed top-0 left-0 w-full h-1 bg-blue-500 z-50"
