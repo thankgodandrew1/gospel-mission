@@ -11,6 +11,7 @@ export default function LessonPage() {
       <Head>
         {/* Page Title and Meta Description */}
         <title>{siteTitle}</title>
+        <meta name="robots" content="index, follow" />
         <meta
           name="description"
           content="Explore the missionary lessons to learn more about the restored gospel of Jesus Christ and its teachings."

@@ -9,6 +9,7 @@ const AboutPage: React.FC = () => {
       <Head>
         {/* Basic Metadata */}
         <title>About | Elder Andrew’s Gospel Mission</title>
+        <meta name="robots" content="index, follow" />
         <meta
           name="description"
           content="Learn more about Elder Andrew, his mission to teach the restored gospel, and the purpose of this site."

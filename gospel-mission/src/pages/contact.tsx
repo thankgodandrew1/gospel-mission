@@ -9,6 +9,8 @@ export default function ContactPage() {
       <Head>
         {/* Page Title and Meta Description */}
         <title>Contact | Elder Andrew’s Gospel Mission</title>
+        <meta name="robots" content="index, follow" />
+
         <meta
           name="description"
           content="Reach out to Elder Andrew to learn more about his mission and how you can connect with the Gospel Mission."

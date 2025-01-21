@@ -11,6 +11,8 @@ const TestimoniesPage: React.FC = () => {
       <Head>
         {/* Page Title and Meta Description */}
         <title>{siteTitle}</title>
+        <meta name="robots" content="index, follow" />
+
         <meta
           name="description"
           content="Read inspiring testimonies from people around the world and learn how the restored gospel has changed their lives."

@@ -11,6 +11,7 @@ const HomePage = () => {
       <Head>
         {/* Page Title and Meta Description */}
         <title>{siteTitle}</title>
+        <meta name="robots" content="index, follow" />
         <meta
           name="description"
           content="Welcome to Gospel Mission! Learn about the restored gospel and explore inspiring lessons taught by Elder Andrew and other missionaries."

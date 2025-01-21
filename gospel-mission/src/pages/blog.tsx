@@ -11,6 +11,7 @@ const Blog = () => {
       <Head>
         {/* Page Title and Meta Description */}
         <title>{siteTitle}</title>
+        <meta name="robots" content="index, follow" />
         <meta
           name="description"
           content="Learn about the restored gospel and explore the lessons taught by missionaries. - Gospel Mission"
