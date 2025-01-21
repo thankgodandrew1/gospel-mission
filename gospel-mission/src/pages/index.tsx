@@ -5,17 +5,26 @@ import Head from 'next/head';
 
 export const siteTitle = 'Home Page | Gospel Mission';
 
-const HomePage = () => {
+// This will be run on the server during SSR
+export async function getServerSideProps() {
+  // You can fetch any dynamic data here if needed, e.g., fetching user info or content
+  const metaDescription = "Welcome to Gospel Mission! Learn about the restored gospel and explore inspiring lessons taught by Elder Andrew and other missionaries.";
+
+  return {
+    props: {
+      metaDescription,
+    },
+  };
+}
+
+const HomePage = ({ metaDescription }: { metaDescription: string }) => {
   return (
     <Layout>
       <Head>
         {/* Page Title and Meta Description */}
         <title>{siteTitle}</title>
         <meta name="robots" content="index, follow" />
-        <meta
-          name="description"
-          content="Welcome to Gospel Mission! Learn about the restored gospel and explore inspiring lessons taught by Elder Andrew and other missionaries."
-        />
+        <meta name="description" content={metaDescription} />
 
         {/* Open Graph Metadata */}
         <meta property="og:title" content={siteTitle} />
